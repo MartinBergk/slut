@@ -5,6 +5,8 @@ services:
       context: ./public  # Path to the directory containing the frontend Dockerfile
     ports:
       - "3000:3000"  # Map port 3000 of the frontend container to port 80 on the host (accessible via VPN)
+    depends_on:
+      - backend
     networks:
       - chat_app_network
 
@@ -13,7 +15,10 @@ services:
       context: ./server  # Path to the directory containing the backend Dockerfile
     ports:
       - "5000:5000"  # Map port 5000 of the backend container to port 5000 on the host
-    networks:
+    environment:
+      - PORT:5000
+      - MONGO_URL=mongodb+srv://martinbergkvist13:campus09@test.yy3xqvh.mongodb.net/?retryWrites=true&w=majority
+networks:
       - chat_app_network
 
 networks:
