@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  frontend:
+    build:
+      context: ./frontend  # Path to the directory containing the frontend Dockerfile
+    ports:
+      - "80:3000"  # Map port 3000 of the frontend container to port 80 on the host (accessible via VPN)
+    networks:
+      - chat_app_network
+
+  backend:
+    build:
+      context: ./backend  # Path to the directory containing the backend Dockerfile
+    ports:
+      - "5000:5000"  # Map port 5000 of the backend container to port 5000 on the host
+    networks:
+      - chat_app_network
+
+networks:
+  chat_app_network:
