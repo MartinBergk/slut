@@ -13,8 +13,11 @@ services:
       context: ./server  # Path to the directory containing the backend Dockerfile
     ports:
       - "5000:5000"  # Map port 5000 of the backend container to port 5000 on the host
+    environment:
+      - PORT:5000
+      - MONGO_URL=mongodb+srv://martinbergkvist13:campus09@test.yy3xqvh.mongodb.net/?retryWrites=true&w=majority
     networks:
       - chat_app_network
-
+      
 networks:
   chat_app_network:
