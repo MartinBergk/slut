@@ -5,6 +5,8 @@ services:
       context: ./public  # Path to the directory containing the frontend Dockerfile
     ports:
       - "3000:3000"  # Map port 3000 of the frontend container to port 80 on the host (accessible via VPN)
+    depends_on:
+      - backend
     networks:
       - chat_app_network
 
