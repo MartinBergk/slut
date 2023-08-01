@@ -4,7 +4,7 @@ services:
     build:
       context: ./public  # Path to the directory containing the frontend Dockerfile
     ports:
-      - "3000:3000"  # Map port 3000 of the frontend container to port 80 on the host (accessible via VPN)
+      - "3000:3000"  # Map port 3000 of the frontend container to port 3000 on the host (accessible via VPN)
     depends_on:
       - backend
     networks:
@@ -20,7 +20,20 @@ services:
       - MONGO_URL=mongodb+srv://martinbergkvist13:campus09@test.yy3xqvh.mongodb.net/?retryWrites=true&w=majority
     networks:
       - slut_chat_app_network
-      
+
+  nginx:
+    build:
+      context: ./nginx  # Path to the Nginx Dockerfile 
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+    depends_on:
+      - frontend
+      - backend
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+
 networks:
   slut_chat_app_network:
     external:
