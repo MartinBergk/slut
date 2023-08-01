@@ -8,7 +8,7 @@ services:
     depends_on:
       - backend
     networks:
-      - slut_chat_app_network
+      - slut_chat_app_network  # Use the existing network name here
 
   backend:
     build:
@@ -19,15 +19,15 @@ services:
       - PORT:5000
       - MONGO_URL=mongodb+srv://martinbergkvist13:campus09@test.yy3xqvh.mongodb.net/?retryWrites=true&w=majority
     networks:
-      - slut_chat_app_network
+      - slut_chat_app_network  # Use the existing network name here
 
   nginx:
     build:
-      context: ./nginx  # Path to the Nginx Dockerfile 
+      context: ./nginx  # Path to the Nginx Dockerfile
     ports:
       - "80:80"
     networks:
-      - app-network
+      - slut_chat_app_network  # Use the existing network name here
     depends_on:
       - frontend
       - backend
@@ -36,5 +36,4 @@ services:
 
 networks:
   slut_chat_app_network:
-    external:
-      name: slut_chat_app_network
+    external: true
