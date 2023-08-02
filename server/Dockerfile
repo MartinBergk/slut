@@ -1,20 +1,20 @@
-# Use an official Node.js runtime as the base image
-FROM node:latest
+# Use an official Python runtime as the base image
+FROM python:3.8
+
+# Install MongoDB client
+RUN apt-get update && apt-get install -y mongodb-clients
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the container
-COPY package*.json ./
+# Copy requirements.txt to the working directory
+COPY requirements.txt ./
 
 # Install backend dependencies
-RUN npm install
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the backend source code to the container
+# Copy all files to the container's working directory
 COPY . .
 
-# Expose the port your backend is running on (e.g., 5000)
-EXPOSE 5000
-
-# Define the command to start your backend application
-CMD ["npm", "start"]
+# Set the command to start the backend
+CMD ["python", "app.py"]
