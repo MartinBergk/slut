@@ -3,7 +3,7 @@ version: '3.8'
 services:
   public:
     build:
-      context: ./public
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
@@ -12,12 +12,12 @@ services:
 
   server:
     build:
-      context: ./server
+      context: ./backend
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
-    environment:
-      MONGODB_URL: "mongodb+srv://martinbergkvist13:campus09@test.yy3xqvh.mongodb.net/?retryWrites=true&w=majority"
+    env_file:
+      - ./backend/.env   # Relative path to the .env file in the server folder
     networks:
       - chat_app_net
 
