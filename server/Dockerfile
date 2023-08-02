@@ -7,8 +7,8 @@ RUN apt-get update && apt-get install -y mongodb-clients
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy backend files from the 'server' directory to the container's working directory
-COPY server/ .
+# Copy all files from the 'server' directory to the container's working directory
+COPY ./server/ .
 
 # Install backend dependencies using environment variables
 ENV MONGO_URL="mongodb+srv://martinbergkvist13:campus09@test.yy3xqvh.mongodb.net/?retryWrites=true&w=majority"
