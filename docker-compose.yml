@@ -3,7 +3,7 @@ version: '3.8'
 services:
   public:
     build:
-      context: ./frontend
+      context: ./public
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
@@ -12,12 +12,12 @@ services:
 
   server:
     build:
-      context: ./backend
+      context: ./server
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
     env_file:
-      - ./backend/.env   # Relative path to the .env file in the server folder
+      - ./server/.env   # Relative path to the .env file in the server folder
     networks:
       - chat_app_net
 
