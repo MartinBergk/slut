@@ -1,22 +1,20 @@
-# Use an official Python runtime as the base image
-FROM python:3.8
-
-# Install MongoDB client
-RUN apt-get update && apt-get install -y mongodb-clients
+# Use the official Node.js image
+FROM node:latest
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy all files from the 'server' directory to the container's working directory
-COPY . .
-
-# Install backend dependencies using environment variables
-ENV MONGO_URL="mongodb+srv://martinbergkvist13:campus09@test.yy3xqvh.mongodb.net/?retryWrites=true&w=majority"
+# Copy the package.json and package-lock.json files to the container
+COPY package*.json ./
 
 # Install backend dependencies
-RUN pip install --no-cache-dir pymongo flask
+RUN npm install
 
-# Set the command to start the backend
-CMD ["python", "app.py"]
+# Copy all backend source code to the container
+COPY . .
+
+# Set the command to start the backend server
+CMD [ "npm", "start" ]
+
 
 
