@@ -30,6 +30,9 @@ services:
       - slut_chat_app_net
 
 networks:
-  slut_chat_app_net:
+  slut_chat_app_network:
+    name: slut_chat_app_net
     driver: bridge
+    external: true
+
 
