@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install frontend dependencies
-RUN npm install
+RUN npm install --silent
 
 # Copy all frontend source code to the container
 COPY . .
